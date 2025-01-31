@@ -8,6 +8,6 @@ const userSchema = new Schema<TUser>({
   role: { type: String, enum: ["user", "admin"], required: true },
 });
 
-const User = model("User", userSchema);
+const User = model<TUser>("User", userSchema);
 
 export default User;
