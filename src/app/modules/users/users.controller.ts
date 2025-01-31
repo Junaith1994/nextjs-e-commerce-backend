@@ -84,9 +84,31 @@ const getSingleUser = async (
   }
 };
 
+const removeSingleUser = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const { id } = req.params;
+    const result = await userServices.removeUserFromDB(id);
+    return res.status(201).json({
+      message: result && "Deleted Single User Successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: (error as Error).message,
+    });
+  }
+};
+
 export const userController = {
   createUser,
   UpdateUserInfo,
   getAllUsers,
   getSingleUser,
+  removeSingleUser,
 };

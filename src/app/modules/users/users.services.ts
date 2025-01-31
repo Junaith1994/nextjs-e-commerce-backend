@@ -46,9 +46,20 @@ const singleUserFromDB = async (id: string) => {
   }
 };
 
+const removeUserFromDB = async (id: string) => {
+  try {
+    const result = await User.deleteOne({ _id: id });
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const userServices = {
   createUserIntoDB,
   updateUserInfoInDB,
   retrieveAllUsersFromDB,
   singleUserFromDB,
+  removeUserFromDB,
 };
