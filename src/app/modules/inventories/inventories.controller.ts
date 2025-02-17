@@ -29,11 +29,11 @@ const updateProductInfo = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { _id } = req.body;
+    const { id } = req.params;
     const { productUpdateInfo } = req.body;
 
     const result = await inventoriesServices.updateProductInfoInDB(
-      _id,
+      id,
       productUpdateInfo
     );
     return res.status(201).json({
@@ -60,6 +60,31 @@ const getAllProducts = async (
     return res.status(201).json({
       message: result && "All Products Retrieved Successfully",
       data: result,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: (error as Error).message,
+    });
+  }
+};
+
+// Search products
+const getSearchedProducts = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const searchQuery = req.query.q as string;
+
+    const searchResult = await inventoriesServices.retrieveQueryProductsFromDB(
+      searchQuery
+    );
+    return res.status(201).json({
+      message: searchResult && "Search Results Retrieved Successfully",
+      data: searchResult,
     });
   } catch (error) {
     console.error(error);
@@ -121,4 +146,5 @@ export const inventoriesController = {
   getAllProducts,
   getSingleProduct,
   removeSingleProduct,
+  getSearchedProducts,
 };

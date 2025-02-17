@@ -1,6 +1,5 @@
 import { TUser } from "./users.interface";
 import User from "./users.model";
-import { Request, Response } from "express";
 
 const createUserIntoDB = async (userData: TUser): Promise<TUser> => {
   try {

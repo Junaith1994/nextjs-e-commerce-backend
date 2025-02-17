@@ -7,10 +7,13 @@ const router = express.Router();
 router.post("/create-product", inventoriesController.createProduct);
 
 // Update product route
-router.post("/update-product", inventoriesController.updateProductInfo);
+router.post("/update-product/:id", inventoriesController.updateProductInfo);
 
 // Ritrieve all products
 router.get("/all-products", inventoriesController.getAllProducts);
+
+// Search products
+router.get("/search", inventoriesController.getSearchedProducts);
 
 // Single product
 router.get("/product/:id", inventoriesController.getSingleProduct);

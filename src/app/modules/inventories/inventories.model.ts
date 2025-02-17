@@ -10,6 +10,9 @@ const productSchema = new Schema<TProduct>({
   productImages: { type: [String], required: true },
 });
 
+// Search index for text search
+productSchema.index({ name: "text", description: "text" });
+
 const Product = mongoose.model<TProduct>("Product", productSchema);
 
 export default Product;

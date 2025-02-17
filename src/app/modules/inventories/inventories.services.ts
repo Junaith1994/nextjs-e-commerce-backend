@@ -40,6 +40,18 @@ const retrieveAllProductsFromDB = async () => {
   }
 };
 
+const retrieveQueryProductsFromDB = async (searchParams: string) => {
+  try {
+    const searchResult = await Product.find({
+      $text: { $search: searchParams },
+    });
+    return searchResult;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const singleProductFromDB = async (id: string) => {
   try {
     const result = await Product.findOne({ _id: id });
@@ -66,4 +78,5 @@ export const inventoriesServices = {
   retrieveAllProductsFromDB,
   singleProductFromDB,
   removeProductFromDB,
+  retrieveQueryProductsFromDB,
 };
