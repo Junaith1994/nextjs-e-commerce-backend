@@ -71,6 +71,30 @@ const getAllProducts = async (
   }
 };
 
+// Retrieve all products by category
+const getAllProductsByCategory = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const { category } = req.params;
+    const result = await inventoriesServices.retrieveProductsByCategory(
+      category
+    );
+    return res.status(201).json({
+      message: result && `All ${category} Products Retrieved Successfully`,
+      data: result,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: (error as Error).message,
+    });
+  }
+};
+
 // Search products
 const getSearchedProducts = async (
   req: Request,
@@ -147,4 +171,5 @@ export const inventoriesController = {
   getSingleProduct,
   removeSingleProduct,
   getSearchedProducts,
+  getAllProductsByCategory,
 };

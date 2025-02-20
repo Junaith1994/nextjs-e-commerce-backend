@@ -27,10 +27,10 @@ const UpdateUserInfo = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { _id } = req.body;
+    const { id } = req.params;
     const { userUpdateInfo } = req.body;
 
-    const result = await userServices.updateUserInfoInDB(_id, userUpdateInfo);
+    const result = await userServices.updateUserInfoInDB(id, userUpdateInfo);
     return res.status(201).json({
       message: result && "User Updated Successfully",
       data: result,

@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/create-user", userController.createUser);
 
 // Update user route
-router.post("/update-user", userController.UpdateUserInfo);
+router.put("/update-user/:id", userController.UpdateUserInfo);
 
 // Ritrieve all users
 router.get("/all-users", userController.getAllUsers);
